@@ -6,11 +6,11 @@ def mnk(x, y):
     numerator=0
     denominator=0
     for i in range(len(x)):
-        numerator+=(x[i]-x_mean)*(y[i]-y_mean)
-        denominator+=(x[i]-x_mean)**2
-        a=numerator/denominator
-        b=y_mean-a*x_mean
-        return a, b
+        xymean+=x[i]*y[i]
+        sqmean+=x[i]**2
+    a=(xymean/len(x))/(sqmean/len(x)-x_mean**2)
+    b=y_mean-a*x_mean
+    return a, b
 x=list(map(float, input().split()))
 y=list(map(float, input().split()))
 a, b=mnk(x, y)
