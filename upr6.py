@@ -13,8 +13,5 @@ def mnk(x, y):
         return a, b
 x=list(map(float, input().split()))
 y=list(map(float, input().split()))
-for i in range(len(x)):
-    x[i]=int(x[i])
-    y[i]=int(y[i])
 a, b=mnk(x, y)
 print(a,b)
