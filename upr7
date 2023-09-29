@@ -1,20 +1,13 @@
-# Импортируем необходимые библиотеки
 import re
 from collections import Counter
 
-# Открываем файл /usr/share/licenses/python/LICENSE
-with open("/usr/share/licenses/python/LICENSE", "r") as f:
-    # Читаем текст из файла
+#путь к файлу зависит от компьютера
+with open("C:\Program Files\Python38\LICENSE.txt", "r") as f:
     text = f.read()
-    # Приводим текст к нижнему регистру
     text = text.lower()
-    # Удаляем знаки препинания и другие символы, не являющиеся буквами или цифрами
     text = re.sub("[^a-z0-9]+", " ", text)
-    # Разбиваем текст на слова по пробелам
     words = text.split()
-    # Считаем, сколько раз каждое слово встречается в тексте
     word_counts = Counter(words)
-    # Выводим десять самых часто встречающихся слов и количество их употреблений
     print("Десять самых часто встречающихся слов и количество их употреблений:")
     for word, count in word_counts.most_common(10):
         print(f"{word}: {count}")
