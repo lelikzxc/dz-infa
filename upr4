@@ -1,1 +1,28 @@
+# Импортируем необходимые библиотеки
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.linear_model import LinearRegression
+
+# Читаем файл iris_data
+iris_data = pd.read_csv("iris_data.csv")
+
+# Создаем список всех возможных комбинаций длин и ширин лепестков и чашелистников
+features = ["SepalLengthCm", "SepalWidthCm", "PetalLengthCm", "PetalWidthCm"]
+combinations = [(x, y) for x in features for y in features if x != y]
+
+# Для каждой комбинации
+for x, y in combinations:
+    # Строим диаграмму рассеяния с линией регрессии
+    sns.lmplot(x=x, y=y, data=iris_data, hue="Species")
+    plt.title(f"Зависимость {y} от {x}")
+    plt.show()
+    # Обучаем модель линейной регрессии на данных
+    X = iris_data[[x]].values
+    Y = iris_data[[y]].values
+    model = LinearRegression()
+    model.fit(X, Y)
+    # Выводим коэффициенты линейной регрессии
+    print(f"Уравнение линейной регрессии: {y} = {model.intercept_[0]:.2f} + {model.coef_[0][0]:.2f} * {x}")
+    print(f"Коэффициент детерминации: {model.score(X, Y):.2f}")
 
