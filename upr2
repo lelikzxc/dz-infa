@@ -1,1 +1,18 @@
+import numpy as np
+import matplotlib.pyplot 
+
+mu = 0 
+sigma = 1 
+
+fig, axes = plt.subplots(2, 2, figsize=(10, 10))
+
+n_points = [10, 100, 1000, 10000]
+
+for i, ax in enumerate(axes.flatten()):
+    x = np.random.normal(mu, sigma, n_points[i])
+    ax.hist(x, bins=20, density=True)
+    ax.set_title(f"n = {n_points[i]}")
+    ax.legend([f"N({mu}, {sigma})"])
+
+plt.show()
 
