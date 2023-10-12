@@ -1,0 +1,44 @@
+import itertools as it
+def comp(s1,s2,s3):
+  count = 0
+  m = max(len(s1), len(s2), len(s3))
+  S = [s1,s2,s3]
+  max_s = []
+  if m == len(s1):
+      max_s = s1
+  elif m == len(s2):
+      max_s = s2
+  elif m == s3:
+      max_s = len(s3)
+  id = S.index(max_s)
+  #result = []
+  ID = [0,1,2]
+  ID.remove(id)
+  max_s.remove(())
+  for i in max_s:
+    flag = True
+    for j in ID:
+      if not(i in S[j]):
+        flag = False
+        break
+    if flag:
+        #result.append(i)
+        count+=1
+  #print(result)
+  return count
+def powerset(iterable):
+  s = list(iterable)
+  return it.chain.from_iterable(it.combinations(s, r) for r in range(len(s) + 1))
+
+
+
+s1 = input()
+s2 = input()
+s3 = input()
+p1 = powerset(s1)
+p2 = powerset(s2)
+p3 = powerset(s3)
+pl1 = list(p1)
+pl2 = list(p2)
+pl3 = list(p3)
+print(comp(list(set(pl1)),list(set(pl2)),list(set(pl3))))
