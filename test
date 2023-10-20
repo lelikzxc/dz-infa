@@ -1,2 +1,53 @@
-#hello
-пробую упражнение 1
+# импортируем модуль tkinter для создания графического интерфейса
+import tkinter as tk
+
+# создаем окно приложения
+window = tk.Tk()
+window.title("Калькулятор")
+
+# создаем поле для ввода выражения
+entry = tk.Entry(window)
+entry.grid(row=0, column=0, columnspan=4)
+
+# создаем функцию для вычисления результата
+def calculate():
+    # получаем выражение из поля ввода
+    expression = entry.get()
+    # пытаемся вычислить результат с помощью функции eval
+    try:
+        result = eval(expression)
+    # если возникла ошибка, выводим сообщение об ошибке
+    except Exception as e:
+        result = "Ошибка: " + str(e)
+    # очищаем поле ввода
+    entry.delete(0, tk.END)
+    # вставляем результат в поле ввода
+    entry.insert(0, result)
+
+# создаем кнопку для вычисления результата
+button = tk.Button(window, text="=", command=calculate)
+button.grid(row=4, column=3)
+
+# создаем список знаков для кнопок
+signs = ["+", "-", "*", "//", "%"]
+
+# создаем цикл для создания кнопок с цифрами и знаками
+for i in range(10):
+    # определяем координаты кнопки в сетке окна
+    row = (9 - i) // 3 + 1
+    col = (i - 1) % 3
+    # создаем кнопку с цифрой i
+    button = tk.Button(window, text=str(i))
+    # размещаем кнопку в окне
+    button.grid(row=row, column=col)
+    # если i кратно 3, создаем кнопку с знаком из списка signs
+    if i % 3 == 0:
+        # определяем индекс знака в списке signs
+        sign_index = i // 3 - 1
+        # создаем кнопку с знаком из списка signs
+        button = tk.Button(window, text=signs[sign_index])
+        # размещаем кнопку в окне
+        button.grid(row=row, column=3)
+
+# запускаем главный цикл приложения
+window.mainloop()
