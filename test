@@ -1,3 +1,6 @@
+Упражнение 1
+
+
 # импортируем модуль tkinter для создания графического интерфейса
 import tkinter as tk
 
@@ -48,6 +51,70 @@ for i in range(10):
         button = tk.Button(window, text=signs[sign_index])
         # размещаем кнопку в окне
         button.grid(row=row, column=3)
+
+# запускаем главный цикл приложения
+window.mainloop()
+
+
+Упражнение 2
+
+# импортируем модуль tkinter для создания графического интерфейса
+import tkinter as tk
+
+# создаем окно приложения
+window = tk.Tk()
+window.title("Калькулятор ИМТ")
+
+# создаем функцию для вычисления индекса массы тела
+def calculate_bmi():
+    # получаем вес и рост из полей ввода
+    weight = float(weight_entry.get())
+    height = float(height_entry.get())
+    # вычисляем индекс массы тела по формуле
+    bmi = weight / (height / 100) ** 2
+    # определяем интерпретацию индекса массы тела по таблице
+    if bmi < 16:
+        interpretation = "Выраженный дефицит массы тела"
+    elif 16 <= bmi < 18.5:
+        interpretation = "Недостаточная (дефицит) масса тела"
+    elif 18.5 <= bmi < 25:
+        interpretation = "Норма"
+    elif 25 <= bmi < 30:
+        interpretation = "Избыточная масса тела (предожирение)"
+    elif 30 <= bmi < 35:
+        interpretation = "Ожирение первой степени"
+    elif 35 <= bmi < 40:
+        interpretation = "Ожирение второй степени"
+    else:
+        interpretation = "Ожирение третьей степени (морбидное)"
+    # очищаем поле для вывода результата
+    result_entry.delete(0, tk.END)
+    # вставляем результат и интерпретацию в поле для вывода результата
+    result_entry.insert(0, f"ИМТ: {bmi:.2f}, {interpretation}")
+
+# создаем надпись "Вес (кг)"
+weight_label = tk.Label(window, text="Вес (кг)")
+weight_label.grid(row=0, column=0)
+
+# создаем поле для ввода веса
+weight_entry = tk.Entry(window)
+weight_entry.grid(row=0, column=1)
+
+# создаем надпись "Рост (см)"
+height_label = tk.Label(window, text="Рост (см)")
+height_label.grid(row=1, column=0)
+
+# создаем поле для ввода роста
+height_entry = tk.Entry(window)
+height_entry.grid(row=1, column=1)
+
+# создаем кнопку для вычисления индекса массы тела
+calculate_button = tk.Button(window, text="Вычислить", command=calculate_bmi)
+calculate_button.grid(row=2, column=0, columnspan=2)
+
+# создаем поле для вывода результата
+result_entry = tk.Entry(window)
+result_entry.grid(row=3, column=0, columnspan=2)
 
 # запускаем главный цикл приложения
 window.mainloop()
